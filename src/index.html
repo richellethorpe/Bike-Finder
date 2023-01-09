@@ -1,9 +1,18 @@
-<!DOCTYPE html>
+
 <html lang="en-US">
 <head>
-  <title></title>
+  <title>Bike Search</title>
 </head>
 <body>
-  
+  <div class="container">
+    <h1>Search for commonly stolen bikes in your area. </h1>
+    
+    <form>
+      <label for="location">Enter a location:</label>
+      <input id="location" type="text" name="location">
+      <button type="submit" class="btn-success" id="submitLocation">See stolen bikes:</button>
+    </form>
+    <p id="showResponse"></p>
+  </div>
 </body>
 </html>

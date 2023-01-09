@@ -1,6 +1,5 @@
 // import "Object name" from "./projectname.js";
-import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './css/bootstrap.css';
 import './css/styles.css';
 import BikeStolen from './bikes-stolen';
   
@@ -14,4 +13,41 @@ function returnBikes(location) {
     printError(errorData);
   });
 }
+
+// UI Logic
+
+// function printBikes(bikes) {
+//   let searchLocation = document.querySelector('#location').value;
+//   const desiredResults = [];
+//   bikes.forEach(bike => {
+//     if (bike.stolen_location.includes(searchLocation)) {
+//       desiredResults.push(bike);
+//     } 
+//   });
+  
+//   document.querySelector('#showResponse').innerText = `The bikes reported stolen in ${searchLocation} are: ${desiredResults}`;
+// }
+
+function printBikes(bikeData) {
+  document.querySelector('#showResponse').innerText = `The amount of bikes reported stolen in ${bikeData}`;
+}
+
+
+function printError(error) {
+  document.querySelector('#showResponse').innerText = `There was an error accessing the bike data for ${error[2]}: ${error[0].status} ${error[0].statusText}: ${error[1].message}`;
+}
+
+function handleFormSubmission(event) {
+  event.preventDefault();
+  const city = document.querySelector('#location').value;
+  document.querySelector('#location').value = null;
+  returnBikes(city);
+}
+
+window.addEventListener("load", function() {
+  document.querySelector('form').addEventListener("submit", handleFormSubmission);
+});
+
+
+
 

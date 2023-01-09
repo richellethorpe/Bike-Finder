@@ -21,7 +21,7 @@ module.exports = {
       verbose: true
     }),
     new HtmlWebpackPlugin({
-      title: 'webpack-template',
+      title: 'bike-search',
       template: './src/index.html',
       inject: 'body'
     })
