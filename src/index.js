@@ -7,8 +7,8 @@ import BikeStolen from './bikes-stolen';
 
 function returnBikes(location) {
   let promise = BikeStolen.getBikes(location);
-  promise.then(function(bikeData) {
-    printBikes(bikeData);
+  promise.then(function(response) {
+    printBikes(response);
   }, function(errorData) {
     printError(errorData);
   });
@@ -16,20 +16,10 @@ function returnBikes(location) {
 
 // UI Logic
 
-// function printBikes(bikes) {
-//   let searchLocation = document.querySelector('#location').value;
-//   const desiredResults = [];
-//   bikes.forEach(bike => {
-//     if (bike.stolen_location.includes(searchLocation)) {
-//       desiredResults.push(bike);
-//     } 
-//   });
-  
-//   document.querySelector('#showResponse').innerText = `The bikes reported stolen in ${searchLocation} are: ${desiredResults}`;
-// }
 
-function printBikes(bikeData) {
-  document.querySelector('#showResponse').innerText = `The amount of bikes reported stolen in ${bikeData}`;
+function printBikes(response) {
+  console.log(response.stolen);
+  document.querySelector('#showResponse').innerText = `The amount of bikes reported stolen in ${response.stolen}`;
 }
 
 
@@ -46,6 +36,7 @@ function handleFormSubmission(event) {
 
 window.addEventListener("load", function() {
   document.querySelector('form').addEventListener("submit", handleFormSubmission);
+  
 });
 
 

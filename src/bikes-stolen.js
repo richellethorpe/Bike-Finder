@@ -3,7 +3,9 @@ export default class BikeStolen {
     return new Promise(function(resolve, reject) {
       let request = new XMLHttpRequest();
       //do we need a ?q parameter for location?
-      const url = `https://bikeindex.org:api/v3/search?q=page=1&per_page=25&location=${input}&distance=10&stolenness=stolen`;
+      const url = `https://bikeindex.org:443/api/v3/search/count?location=${input}&distance=10&stolenness=stolen`;
+
+  
       request.addEventListener('loadend', function() {
         const response = JSON.parse(this.responseText);
         if (this.status === 200) {
