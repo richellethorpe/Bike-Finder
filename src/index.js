@@ -3,42 +3,36 @@ import './css/bootstrap.css';
 import './css/styles.css';
 import BikeStolen from './bikes-stolen';
   
-// Business Logic
 
-function returnBikes(location) {
-  let promise = BikeStolen.getBikes(location);
-  promise.then(function(response) {
-    printBikes(response);
-  }, function(errorData) {
-    printError(errorData);
-  });
+async function getBikes(location) {
+  const response = await BikeStolen.getBikes(location);
+  if (response.proximity) {
+    printBikes(response, location);
+  } else {
+    printError(location);
+  }
 }
 
-// UI Logic
+//UI Logic
 
-
-function printBikes(response) {
-  console.log(response.stolen);
-  document.querySelector('#showResponse').innerText = `The amount of bikes reported stolen in ${response.stolen}`;
+function printBikes(response, location) {
+  document.querySelector('#showResponse').innerText = `The number of bikes stolen in ${location} is ${response.proximity}.`;
 }
 
-
-function printError(error) {
-  document.querySelector('#showResponse').innerText = `There was an error accessing the bike data for ${error[2]}: ${error[0].status} ${error[0].statusText}: ${error[1].message}`;
+function printError(location) {
+  console.log("printError" + location);
+  document.querySelector(`#showResponse`).innerText = `There was an error accessing the bike index for ${location}: We were unable to find information on that location. Please try again.`;
 }
 
 function handleFormSubmission(event) {
   event.preventDefault();
-  const city = document.querySelector('#location').value;
+  const location = document.querySelector('#location').value;
   document.querySelector('#location').value = null;
-  returnBikes(city);
+  getBikes(location);
+  console.log(location);
 }
+
 
 window.addEventListener("load", function() {
   document.querySelector('form').addEventListener("submit", handleFormSubmission);
-  
 });
-
-
-
-
